@@ -33,14 +33,13 @@
 #include <regex.h>
 #include <stdlib.h>
 
-#include <GLES3/gl3.h>
+#include <GLES2/gl2.h>
 
 #include "common.h"
 
 GLint iTime, iFrame;
 
 static const char *shadertoy_vs_tmpl_100 =
-		"// version (default: 1.10)              \n"
 		"%s                                      \n"
 		"                                        \n"
 		"attribute vec3 position;                \n"
@@ -51,7 +50,6 @@ static const char *shadertoy_vs_tmpl_100 =
 		"}                                       \n";
 
 static const char *shadertoy_vs_tmpl_300 =
-		"// version                              \n"
 		"%s                                      \n"
 		"                                        \n"
 		"in vec3 position;                       \n"
@@ -62,7 +60,6 @@ static const char *shadertoy_vs_tmpl_300 =
 		"}                                       \n";
 
 static const char *shadertoy_fs_tmpl_100 =
-		"// version (default: 1.10)                                                           \n"
 		"%s                                                                                   \n"
 		"                                                                                     \n"
 		"#ifdef GL_FRAGMENT_PRECISION_HIGH                                                    \n"
@@ -86,7 +83,6 @@ static const char *shadertoy_fs_tmpl_100 =
 		"}                                                                                    \n";
 
 static const char *shadertoy_fs_tmpl_300 =
-		"// version                                                                           \n"
 		"%s                                                                                   \n"
 		"                                                                                     \n"
 		"#ifdef GL_FRAGMENT_PRECISION_HIGH                                                    \n"

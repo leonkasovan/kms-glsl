@@ -24,15 +24,15 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
-#ifndef GL_ES_VERSION_2_0
+// #ifndef GL_ES_VERSION_2_0
 #include <GLES2/gl2.h>
-#endif
+// #endif
 #include <GLES2/gl2ext.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
 #include <gbm.h>
-#include <drm_fourcc.h>
+#include <libdrm/drm_fourcc.h>
 #include <stdbool.h>
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))

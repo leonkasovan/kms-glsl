@@ -124,6 +124,7 @@ int init(const char *shadertoy, const struct options *options) {
 		printf("failed to initialize %s DRM\n", options->atomic_drm_mode ? "atomic" : "legacy");
 		return -1;
 	}
+	printf("DRM initialized with display %dx%d\n", drm->mode->hdisplay, drm->mode->vdisplay);
 
 	uint32_t format = DRM_FORMAT_XRGB8888;
 	if (options->format) {

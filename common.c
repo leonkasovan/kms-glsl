@@ -453,7 +453,7 @@ const struct egl * init_egl(const struct gbm *gbm, uint64_t modifier, bool surfa
 	egl.modifiers_supported = has_ext(egl_exts_dpy,
 					"EGL_EXT_image_dma_buf_import_modifiers");
 
-	printf("Using display %p with EGL version %d.%d\n",
+	printf("\nUsing display %p with EGL version %d.%d\n",
 			egl.display, major, minor);
 
 	printf("===================================\n");
@@ -554,6 +554,18 @@ const struct egl * init_egl(const struct gbm *gbm, uint64_t modifier, bool surfa
 	return &egl;
 }
 
+int saveShader(const char *fname, const char *shader_source){
+	FILE *f;
+
+	f = fopen(fname, "wt");
+	if (f){
+		fputs(shader_source, f);
+		fclose(f);
+		return 0;
+	}
+	return 1;
+}
+
 int create_program(const char *vs_src, const char *fs_src)
 {
 	GLuint vertex_shader, fragment_shader, program;
@@ -572,7 +584,9 @@ int create_program(const char *vs_src, const char *fs_src)
 	if (!ret) {
 		char *log;
 
-		printf("vertex shader compilation failed!:\n");
+		printf("vertex shader [err.vert.glsl] compilation failed!:\n");
+		saveShader("err.vert.glsl", vs_src);
+		// puts(vs_src);
 		glGetShaderiv(vertex_shader, GL_INFO_LOG_LENGTH, &ret);
 		if (ret > 1) {
 			log = malloc(ret);
@@ -597,7 +611,9 @@ int create_program(const char *vs_src, const char *fs_src)
 	if (!ret) {
 		char *log;
 
-		printf("fragment shader compilation failed!:\n");
+		printf("fragment shader [err.frag.glsl] compilation failed!:\n");
+		saveShader("err.frag.glsl", fs_src);
+		// puts(fs_src);
 		glGetShaderiv(fragment_shader, GL_INFO_LOG_LENGTH, &ret);
 
 		if (ret > 1) {
